@@ -2,7 +2,7 @@
 
 ### Scalar subquery 
 
-#### Scalar subquery in join and from clause:
+#### Scalar subquery in where clause:
 ```
 Select * from employee where salary > (select avg(salary) from employee) ;
 ```
@@ -19,16 +19,16 @@ join ( select avg(salary) sal from employeee) avg_sal
    	One col multiple row.
 	multiple  col multiple row.
 
+##### mutliple row multipe col subquery example in where
 ```
-Select * from employee 
-Where (dept_name, salary) in (
-							select dept_name, max(salary)
-							from employee
-							group by dept_name) ;
+select * from employee 
+where (dept_name, salary) in (
+				select dept_name, max(salary)
+				from employee
+				group by dept_name) ;
 ```
 
 
-something something
 
 ```
 Select * 
@@ -41,6 +41,7 @@ where dept_name not in (select distinct dept_name from employee) ;
 
 ##### Subquery in select has be a scaler subquery.
 
+##### "having" clause subquery example.
 ```
 select store_name, sum(quantity) 
 from sales
