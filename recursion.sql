@@ -16,10 +16,20 @@ with recursive emp_hierachy as
     from emp_details where name='Asha'
     union
     select E.id, E.name, E.manager_id, E.designation, H.lvl+1 as lvl
-    from emp_hierachy 
+    from emp_hierachy H
     join emp_details E on H.id = E.manager_id
     )
 select * from emp_hierachy ;
 
 
 --  find the hierachy of managers  for a given employee.
+
+with recursive emp_hierachy as
+    ( select id, name, manager_id, designation, 1 as lvl
+    from emp_details where name='David'
+    union
+    select E.id, E.name, E.manager_id, E.designation, H.lvl+1 as lvl
+    from emp_hierachy H
+    join emp_details E on E.id = H.manager_id
+    )
+select * from emp_hierachy ;
